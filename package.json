@@ -1,9 +1,0 @@
-{
-  "name": "apnaastro-landing-page",
-  "private": true,
-  "version": "1.0.0",
-  "description": "ApnaAstro platform marketing landing page (static)",
-  "scripts": {
-    "build": "rm -rf dist && mkdir -p dist && cp index.html dist/index.html"
-  }
-}
