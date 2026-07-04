@@ -58,26 +58,57 @@ stack unless bundling a font file into `assets/`).
 
 ## 4. Layout & sections (top → bottom)
 
-Mirror pop.site's flow, retargeted to selling the platform:
+Mirror pop.site's flow, retargeted to selling the platform. **Every CTA opens the
+contact modal** (see §5b) — direct-click psychology: one obvious next action
+everywhere, low friction, phone capture.
 
-1. **Nav** — left wordmark (logo + "ApnaAstro"), right links (Features, How it
-   works, Pricing) + a pill CTA "Book a demo". Sticky, transparent → solid on scroll.
-2. **Hero** — pill eyebrow ("✨ White-label astrology platform"), big H1 with one
-   gradient word ("Launch **your own** astrology app — your brand, not ours."),
-   one-line sub, two CTAs (primary "Start free trial", ghost "See how it works"),
-   a trust line ("Powering astrology businesses across India"). Optional hero art:
-   a phone mock or a soft gradient blob — keep it light.
-3. **Logos / social proof strip** — "Trusted by" or "Featured on" row (grey logos).
-4. **Feature grid** — 6 rounded cards (icon + title + one line): Branded user &
-   astrologer apps · Own admin panel · Isolated data · Landing page included ·
-   Chat/call/live · Own payments & keys. This is the pop.site "sections showcase".
-5. **How it works** — 4 numbered steps (Create tenant → Build apps → Go live →
-   Manage & bill), each a soft card.
-6. **Testimonial(s)** — 1–3 quotes with name/role (pop.site leans hard on these).
-7. **Pricing / trial CTA band** — gradient-tinted panel: "Start with a 14-day free
-   trial", one CTA. "No credit card to start."
-8. **Footer** — wordmark, link columns (Product / Company / Legal), contact
-   (hello@devifai.in), "© ApnaAstro · a DevifAI product".
+1. **Nav** — left wordmark, right links (Features, Demos, How it works, Pricing),
+   theme toggle + a pill CTA "Book a demo". Sticky, transparent → solid on scroll.
+2. **Hero** — pill eyebrow ("✨ White-label astrology platform · Live in days"),
+   big H1 with one gradient word ("Launch **your own** astrology app — your brand,
+   not ours."), one-line sub, primary CTA "Start 14-day free trial →" + ghost
+   "Watch demo", trust line (stars · "Free for 14 days · No credit card"). Hero art:
+   **3 phone mockups** (Admin / User / Astrologer) fanned with rotation + soft
+   shadow over a subtle gradient blob (see §6b).
+3. **Logos / "everything on one platform" strip** — grey chip row.
+4. **Demos** — 3 platform demo cards (see §6c): **User app** (phone frame),
+   **Astrologer app** (phone frame), **Admin panel** (web 16:10 frame). Each has a
+   video slot + play button (opens modal until real videos are dropped in). Section
+   CTA: "Get all three — free for 14 days →".
+5. **Feature grid** — 6 rounded cards (icon-in-tile + title + one line).
+6. **How it works** — 4 numbered steps (Create tenant → Build apps → Go live →
+   Manage & bill).
+7. **Pricing** — 3 plan cards (see §5c) + "Most popular" highlight on the middle.
+8. **Testimonials** — 3 quotes with avatar/name/role + 5 stars.
+9. **Trial CTA band** — gradient-tinted panel, one CTA, "No credit card".
+10. **Footer** — wordmark, link columns (Product / Company / Legal), contact.
+11. **Sticky mobile CTA** — fixed bottom bar on mobile ("Start 14-day free trial →"),
+    hides when the footer or modal is in view.
+
+## 5b. Contact modal (all CTAs → this)
+
+- Every button carries `data-open="<intent>"` (e.g. "Start free trial",
+  "Monthly plan — ₹5,999/mo", "One-time buyout", "Demo — User app"). Clicking any
+  opens a centered modal sheet; the intent is shown as a small chip + stored in a
+  hidden field so we know which offer/plan the lead clicked.
+- **Fields:** Name (required), **Phone** (required — `+91` country-code box +
+  10-digit tel input, numeric), Email (optional). Submit = "Request my free trial →".
+- Validates name + 10-digit phone client-side. On submit shows a success state
+  ("You're on the list! 🎉" + WhatsApp number). Currently captures to
+  `localStorage` (`aa-leads`) — **TODO: POST to a backend lead endpoint** when one
+  exists. Esc / backdrop / ✕ closes; body scroll locks while open.
+
+## 5c. Plans (monthly SaaS)
+
+Three cards, middle = "Most popular":
+
+| Plan | Price | Note |
+|------|-------|------|
+| **Free trial** | ₹0 for 14 days | Full access, no credit card |
+| **Monthly** ⭐ | **₹5,999/month** per client | Everything, cancel anytime |
+| **One-time** | One-time buyout (custom) | Own the platform outright |
+
+All three CTAs open the contact modal (no public checkout).
 
 ## 5. Components
 
@@ -95,12 +126,33 @@ Mirror pop.site's flow, retargeted to selling the platform:
 
 ## 6. Imagery & motion
 
-- pop.site uses clean product screenshots + minimal graphics. For ApnaAstro:
-  use **1 hero device mock** (a branded app screen) + **emoji or simple line
-  icons** in feature cards. Avoid stock mystical photos.
 - Motion: subtle only — fade/rise on scroll (IntersectionObserver), button hover
-  lift. No autoplay galaxies. Keep the page **self-contained** (no external JS/CDN)
-  to satisfy the static-host + CSP constraints (see below).
+  lift. No autoplay galaxies. Page stays **self-contained** (no external JS/CDN).
+
+## 6b. Hero phone mockups (pure CSS device frames)
+
+Three `.phone` frames — `.left` (Admin), `.center` (User, front), `.right`
+(Astrologer) — fanned:
+- Frame: `width:236px`, dark gradient body, `border-radius:38px`, `padding:11px`,
+  soft `--shadow`, a speaker pill via `::after`. Inner `.screen` = `border-radius:28px`,
+  `overflow:hidden`, `aspect-ratio:9/19.3`.
+- Side phones: `.left` `rotate(-6deg) translate scale(.9)`, `.right` `rotate(6deg)`;
+  center on top (`z-index:3`). On ≤720px, side phones hide, center goes full.
+- **Screenshot slot:** each `.screen` currently renders a branded placeholder
+  (`.ph-fill` gradient + skeleton cards + caption). **To add real screenshots**,
+  replace the placeholder with `<img src="assets/shot-user.png">` (object-fit:cover)
+  inside `.screen`. Center=violet, left=dark, right=gold to hint the 3 surfaces.
+
+## 6c. Demo video slots (3 platforms)
+
+`#demos` = 3 `.demo` cards: two `.phoneframe` (9:16) for the mobile apps + one
+16:10 for the web admin. Each `.frame` has a badge, a circular play button
+(`data-open` → modal for now), and a "Demo video coming soon" hint.
+- **To add a real demo video:** drop the file in `assets/` and replace the frame
+  body with `<video src="assets/demo-user.mp4" poster="assets/poster-user.jpg"
+  controls playsinline></video>` (bundle the file — no hotlinking, CSP-safe).
+  Filenames expected: `demo-user.mp4`, `demo-astrologer.mp4`, `demo-admin.mp4`
+  (+ optional `poster-*.jpg`).
 
 ## 7. Constraints (important)
 
@@ -115,11 +167,18 @@ Mirror pop.site's flow, retargeted to selling the platform:
 
 ## 8. Assets
 
-Put brand assets here in `assets/`:
-- `logo.svg` — the ApnaAstro wordmark/mark (starter provided).
-- `favicon.svg` / icon — derive from the mark.
-- (optional) `hero.svg` / `hero.png` — hero device mock or gradient art.
-- (optional) a self-hosted `.woff2` if not using the system font stack.
+Put brand + media assets here in `assets/`:
+- `logo.svg` — the ApnaAstro wordmark/mark (provided).
+- `favicon.svg` — derive from the mark (provided).
+- **Screenshots (drop in later, wire per §6b):** `shot-user.png`,
+  `shot-astrologer.png`, `shot-admin.png` (9:19.3 for phones; wide for admin).
+- **Demo videos (drop in later, wire per §6c):** `demo-user.mp4`,
+  `demo-astrologer.mp4`, `demo-admin.mp4` (+ optional `poster-*.jpg`). Bundle the
+  files locally — do NOT hotlink (CSP + static-host constraint).
 
-Current `index.html` already implements a first cut of sections 1–7 with the
-palette above — treat this doc as the spec to refine it toward the pop.site polish.
+`index.html` implements ALL sections above (hero phone mockups, 3-platform demo
+slots, 6 feature cards, 4 steps, 3 monthly plans, testimonials, trial band, sticky
+mobile CTA, and a contact-form modal that every CTA opens). It is fully
+self-contained, theme-aware (light/dark + a manual toggle), and responsive.
+Screenshots/videos are the only things left to drop in — the slots are marked with
+HTML comments in `index.html`.
