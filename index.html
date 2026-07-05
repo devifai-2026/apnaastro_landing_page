@@ -129,7 +129,7 @@
   a.frame:hover{filter:brightness(1.12)}
   a.frame:hover .play{background:rgba(255,255,255,.28);transform:scale(1.06)}
   .demo.phoneframe .frame{aspect-ratio:9/16;max-height:420px}
-  .demo .frame video,.demo .frame img{width:100%;height:100%;object-fit:cover}
+  .demo .frame video,.demo .frame img{width:100%;height:100%;object-fit:cover;object-position:top center}
   .demo .play{width:64px;height:64px;border-radius:50%;background:rgba(255,255,255,.14);backdrop-filter:blur(6px);display:grid;place-items:center;color:#fff;font-size:1.4rem;border:1.5px solid rgba(255,255,255,.35);cursor:pointer}
   .demo .badge{position:absolute;top:12px;left:12px;background:rgba(0,0,0,.55);color:#fff;font-size:.72rem;font-weight:700;padding:5px 11px;border-radius:999px}
   .demo .cap{padding:18px 20px}
@@ -268,7 +268,7 @@
     <div class="devices reveal">
       <!-- Real screenshots later: <div class="screen"><img src="assets/shot-user.png"></div> -->
       <div class="phone left"><div class="screen">
-        <div class="ph-fill"><div class="top"><span class="a">🛠️</span>Admin</div><div class="card"></div><div class="row"><div class="card"></div><div class="card"></div></div><div class="card tall"></div><div class="cap">Manage astrologers &amp; wallets</div></div>
+        <img src="assets/shot-admin.png" alt="Admin panel dashboard" loading="lazy" width="720" height="1600" />
       </div><span class="ph-label">Admin panel</span></div>
 
       <div class="phone center"><div class="screen">
@@ -301,19 +301,15 @@
     <div class="demos">
       <div class="demo phoneframe reveal">
         <div class="frame">
-          <!-- Drop the user-app demo: <video src="assets/demo-user.mp4" poster="assets/poster-user.jpg" controls playsinline></video> -->
+          <img src="assets/shot-user.png" alt="User app screens" loading="lazy" />
           <span class="badge">📱 User app</span>
-          <button class="play" data-open="Demo — User app" aria-label="Play user app demo">▶</button>
-          <span class="soon">Demo video coming soon</span>
         </div>
         <div class="cap"><h3>User app</h3><p>Chat, call, live sessions, pujas &amp; wallet — fully branded.</p></div>
       </div>
       <div class="demo phoneframe reveal">
         <div class="frame">
-          <!-- <video src="assets/demo-astrologer.mp4" poster="assets/poster-astrologer.jpg" controls playsinline></video> -->
+          <img src="assets/shot-astrologer.png" alt="Astrologer app screens" loading="lazy" />
           <span class="badge">🔮 Astrologer app</span>
-          <button class="play" data-open="Demo — Astrologer app" aria-label="Play astrologer app demo">▶</button>
-          <span class="soon">Demo video coming soon</span>
         </div>
         <div class="cap"><h3>Astrologer app</h3><p>Go online, take consults, manage earnings &amp; availability.</p></div>
       </div>
