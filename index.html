@@ -136,6 +136,9 @@
   .demo .cap h3{margin:0 0 4px;font-size:1.08rem;font-weight:700}
   .demo .cap p{margin:0;color:var(--muted);font-size:.9rem}
   .demo .frame .soon{position:absolute;bottom:12px;font-size:.72rem;color:rgba(255,255,255,.6)}
+  .sl-embed{width:100%;height:100%;border:0;display:block}
+  .sl-open{position:absolute;bottom:8px;right:10px;font-size:.72rem;font-weight:600;color:#fff;background:rgba(0,0,0,.55);padding:4px 10px;border-radius:999px;text-decoration:none;backdrop-filter:blur(4px)}
+  .sl-open:hover{background:var(--p)}
 
   /* Steps */
   .steps{counter-reset:s;display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:20px}
@@ -315,12 +318,15 @@
         <div class="cap"><h3>Astrologer app</h3><p>Go online, take consults, manage earnings &amp; availability.</p></div>
       </div>
       <div class="demo reveal">
-        <a class="frame" href="https://demo.storylane.com/share/6awhu9pzygth" target="_blank" rel="noreferrer" aria-label="Open interactive admin demo">
-          <span class="badge">🎛️ Admin panel (web)</span>
-          <span class="play" aria-hidden="true">▶</span>
-          <span class="soon">Interactive demo — click to explore</span>
-        </a>
-        <div class="cap"><h3>Admin panel</h3><p>Run astrologers, content, payouts, live &amp; analytics from the web.</p></div>
+        <div class="frame">
+          <!-- Storylane interactive demo, embedded inline. Falls back to a click-out
+               link if the iframe is blocked. -->
+          <iframe class="sl-embed" src="https://demo.storylane.com/demo/6awhu9pzygth?embed=inline"
+            loading="lazy" title="ApnaAstro admin panel interactive demo"
+            allow="fullscreen" allowfullscreen referrerpolicy="no-referrer-when-downgrade"></iframe>
+          <a class="sl-open" href="https://demo.storylane.com/share/6awhu9pzygth" target="_blank" rel="noreferrer">Open full demo ↗</a>
+        </div>
+        <div class="cap"><h3>Admin panel · interactive</h3><p>Run astrologers, content, payouts, live &amp; analytics from the web.</p></div>
       </div>
     </div>
     <div style="text-align:center;margin-top:34px" class="reveal">
