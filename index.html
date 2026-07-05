@@ -82,11 +82,12 @@
   .stars{color:var(--a);letter-spacing:2px}
 
   /* Phone mockups */
-  .devices{position:relative;display:flex;justify-content:center;align-items:flex-end;margin:54px auto 0;max-width:840px;min-height:460px}
-  .phone{position:relative;width:236px;border-radius:38px;background:linear-gradient(160deg,#1c1830,#0e0b1c);padding:11px;box-shadow:var(--shadow);border:1px solid rgba(255,255,255,.06)}
+  .devices{position:relative;display:flex;justify-content:center;align-items:center;margin:54px auto 0;max-width:860px;min-height:520px}
+  .phone{position:relative;width:236px;border-radius:38px;background:linear-gradient(160deg,#1c1830,#0e0b1c);padding:11px;box-shadow:var(--shadow);border:1px solid rgba(255,255,255,.06);flex:0 0 auto}
   .phone::after{content:"";position:absolute;top:16px;left:50%;transform:translateX(-50%);width:56px;height:6px;border-radius:6px;background:rgba(255,255,255,.18);z-index:5}
-  .phone .screen{position:relative;border-radius:28px;overflow:hidden;aspect-ratio:9/19.3;background:var(--soft);display:flex;flex-direction:column}
-  .phone .screen img,.phone .screen video{width:100%;height:100%;object-fit:cover;display:block}
+  .phone .screen{position:relative;border-radius:28px;overflow:hidden;aspect-ratio:9/19.5;background:var(--soft);display:flex;flex-direction:column}
+  /* Screenshots: show the TOP of the app (header + first content), never a mid crop. */
+  .phone .screen img,.phone .screen video{width:100%;height:100%;object-fit:cover;object-position:top center;display:block}
   .ph-fill{flex:1;display:flex;flex-direction:column;background:linear-gradient(180deg,var(--p),#5a34c9);color:#fff;padding:26px 18px;gap:14px}
   .ph-fill .top{display:flex;align-items:center;gap:8px;font-weight:800;font-size:.95rem}
   .ph-fill .top .a{width:26px;height:26px;border-radius:8px;background:rgba(255,255,255,.22);display:grid;place-items:center}
@@ -95,9 +96,9 @@
   .ph-fill .row{display:flex;gap:10px}.ph-fill .row .card{flex:1;height:52px}
   .ph-fill .cap{margin-top:auto;font-size:.72rem;opacity:.9;text-align:center}
   .ph-label{position:absolute;bottom:-30px;left:0;right:0;text-align:center;font-size:.8rem;font-weight:700;color:var(--muted)}
-  .phone.left{transform:translateX(46px) translateY(24px) rotate(-6deg) scale(.9);z-index:1}
-  .phone.right{transform:translateX(-46px) translateY(24px) rotate(6deg) scale(.9);z-index:1}
-  .phone.center{z-index:3}
+  .phone.left{transform:translateX(30px) translateY(26px) rotate(-7deg) scale(.86);z-index:1}
+  .phone.right{transform:translateX(-30px) translateY(26px) rotate(7deg) scale(.86);z-index:1}
+  .phone.center{z-index:3;transform:translateY(-6px)}
   .phone.center .ph-fill{background:linear-gradient(180deg,#171226,#241a44)}
   .phone.center .ph-fill .card{background:rgba(255,255,255,.1)}
   .phone.right .ph-fill{background:linear-gradient(180deg,var(--a),#e08800);color:#2a1a00}
@@ -124,7 +125,9 @@
   @media(max-width:900px){.demos{grid-template-columns:1fr}}
   .demo{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow-sm);transition:transform .22s,box-shadow .22s}
   .demo:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
-  .demo .frame{position:relative;aspect-ratio:16/10;background:linear-gradient(135deg,#1a1430,#0f0b1e);display:grid;place-items:center;overflow:hidden}
+  .demo .frame{position:relative;aspect-ratio:16/10;background:linear-gradient(135deg,#1a1430,#0f0b1e);display:grid;place-items:center;overflow:hidden;text-decoration:none;cursor:pointer;transition:filter .2s}
+  a.frame:hover{filter:brightness(1.12)}
+  a.frame:hover .play{background:rgba(255,255,255,.28);transform:scale(1.06)}
   .demo.phoneframe .frame{aspect-ratio:9/16;max-height:420px}
   .demo .frame video,.demo .frame img{width:100%;height:100%;object-fit:cover}
   .demo .play{width:64px;height:64px;border-radius:50%;background:rgba(255,255,255,.14);backdrop-filter:blur(6px);display:grid;place-items:center;color:#fff;font-size:1.4rem;border:1.5px solid rgba(255,255,255,.35);cursor:pointer}
@@ -312,12 +315,11 @@
         <div class="cap"><h3>Astrologer app</h3><p>Go online, take consults, manage earnings &amp; availability.</p></div>
       </div>
       <div class="demo reveal">
-        <div class="frame">
-          <!-- <video src="assets/demo-admin.mp4" poster="assets/poster-admin.jpg" controls playsinline></video> -->
+        <a class="frame" href="https://demo.storylane.com/share/6awhu9pzygth" target="_blank" rel="noreferrer" aria-label="Open interactive admin demo">
           <span class="badge">🎛️ Admin panel (web)</span>
-          <button class="play" data-open="Demo — Admin panel" aria-label="Play admin demo">▶</button>
-          <span class="soon">Demo video coming soon</span>
-        </div>
+          <span class="play" aria-hidden="true">▶</span>
+          <span class="soon">Interactive demo — click to explore</span>
+        </a>
         <div class="cap"><h3>Admin panel</h3><p>Run astrologers, content, payouts, live &amp; analytics from the web.</p></div>
       </div>
     </div>
@@ -377,7 +379,7 @@
         <ul>
           <li><span class="ck">✓</span> Both mobile apps + web admin</li>
           <li><span class="ck">✓</span> Fully branded &amp; isolated</li>
-          <li><span class="ck">✓</span> Signed app builds</li>
+          <li><span class="ck">✓</span> Play Store–ready apps, published for you</li>
           <li><span class="ck">✓</span> No credit card required</li>
         </ul>
         <button class="btn ghost" data-open="Start free trial">Start free trial</button>
@@ -391,8 +393,8 @@
         <div class="pricesub">per client · cancel anytime</div>
         <ul>
           <li><span class="ck">✓</span> Everything in the free trial</li>
-          <li><span class="ck">✓</span> Unlimited usage &amp; updates</li>
-          <li><span class="ck">✓</span> In-console signed builds</li>
+          <li><span class="ck">✓</span> Unlimited usage &amp; app updates</li>
+          <li><span class="ck">✓</span> New releases built &amp; published for you</li>
           <li><span class="ck">✓</span> AI insights &amp; analytics</li>
           <li><span class="ck">✓</span> Priority support</li>
         </ul>
