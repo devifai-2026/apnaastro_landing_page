@@ -141,9 +141,14 @@
   .sl-open:hover{background:var(--p)}
 
   /* Steps */
-  .steps{counter-reset:s;display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:20px}
-  .step{position:relative;padding:28px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow-sm)}
-  .step::before{counter-increment:s;content:counter(s);display:grid;place-items:center;width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,var(--p),var(--a));color:#fff;font-weight:800;font-size:1.05rem;margin-bottom:16px;box-shadow:var(--shadow-sm)}
+  /* How-it-works TIMELINE: a vertical connecting line with numbered nodes + cards. */
+  .steps{counter-reset:s;position:relative;max-width:720px;margin:0 auto;display:flex;flex-direction:column;gap:26px;padding-left:8px}
+  /* the connecting line, running through the centre of the node column */
+  .steps::before{content:"";position:absolute;left:27px;top:14px;bottom:14px;width:2px;background:linear-gradient(180deg,var(--p),var(--a));opacity:.35}
+  .step{position:relative;padding:22px 24px 22px 68px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow-sm)}
+  /* numbered node sitting on the line */
+  .step::before{counter-increment:s;content:counter(s);position:absolute;left:8px;top:22px;display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--p),var(--a));color:#fff;font-weight:800;font-size:1.05rem;box-shadow:0 0 0 5px var(--bg),var(--shadow-sm);z-index:1}
+  @media(max-width:520px){.step{padding-left:60px}.steps::before{left:23px}.step::before{left:4px;width:38px;height:38px}}
   .step h3{margin:0 0 6px;font-size:1.1rem;font-weight:700}
   .step p{margin:0;color:var(--muted);font-size:.95rem}
 
